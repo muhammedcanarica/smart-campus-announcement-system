@@ -6,6 +6,7 @@ Bu proje, üniversite kampüsünde yayımlanan duyuruların ilgili kullanıcıla
 
 Projede aşağıdaki temel gereksinimler uygulanmıştır:
 
+- Console tabanlı kullanıcı girişi
 - En az iki kullanıcı tipi: `StudentObserver` ve `TeacherObserver`
 - Dört duyuru tipi: `ExamAnnouncement`, `EventAnnouncement`, `FoodMenuAnnouncement`, `LibraryAnnouncement`
 - Üç bildirim tipi: `EmailNotification`, `SmsNotification`, `PushNotification`
@@ -64,8 +65,8 @@ Proje, sorumlulukları birbirinden ayırmak için katmanlı mimari ile tasarland
 | Katman | Paket | Görev |
 | --- | --- | --- |
 | Sunum katmanı | `presentation` | Uygulamanın giriş noktası olan `Main` sınıfını içerir. |
-| Uygulama katmanı | `application` | İş akışını yöneten servisleri, publisher sınıfını ve factory sınıflarını içerir. |
-| Alan modeli katmanı | `domain` | Duyuru, kullanıcı ve bildirim kavramlarını temsil eden sınıfları içerir. |
+| Uygulama katmanı | `application` | İş akışını yöneten servisleri, kimlik doğrulama servisini, publisher sınıfını ve factory sınıflarını içerir. |
+| Alan modeli katmanı | `domain` | Duyuru, kullanıcı, kullanıcı rolü ve bildirim kavramlarını temsil eden sınıfları içerir. |
 | Altyapı katmanı | `infrastructure` | `Logger` ve `InMemoryUserRepository` gibi teknik bileşenleri içerir. |
 
 Bu yapı sayesinde her katman kendi sorumluluğuna odaklanır:
@@ -91,19 +92,32 @@ Yapay zeka, geliştirme sürecinde yardımcı araç olarak kullanılmıştır:
 
 Sonuç olarak yapay zeka, geliştiriciye yardımcı olan bir üretkenlik aracı olarak kullanılmış; uygulamanın iş mantığı ise Java sınıfları ve tasarım desenleri ile gerçekleştirilmiştir.
 
+## Kullanıcı Girişi
+
+Uygulama başladığında önce console tabanlı giriş ekranı gösterilir. Giriş kontrolü `AuthenticationService` tarafından yapılır ve kullanıcı bilgileri `InMemoryUserRepository` içinde tutulur.
+
+Varsayılan yönetici bilgileri:
+
+- Kullanıcı adı: `admin`
+- Şifre: `1234`
+
+Giriş başarılı olduğunda mevcut duyuru yayımlama senaryosu çalışır. Giriş başarısız olduğunda program `Giriş başarısız. Program sonlandırılıyor.` mesajını yazar ve sonlanır.
+
 ## Uygulama Senaryosu
 
 `Main.java` içinde aşağıdaki senaryo çalıştırılır:
 
-1. Sisteme öğrenci ve öğretmen kullanıcılar eklenir.
-2. Kullanıcıların bildirim tercihleri belirlenir.
-3. Yönetici yeni bir sınav duyurusu oluşturur.
-4. `AnnouncementFactory`, uygun duyuru nesnesini üretir.
-5. Duyuru yayımlanır.
-6. `AnnouncementPublisher`, Observer yapısı ile kullanıcıları otomatik olarak bilgilendirir.
-7. `NotificationFactory`, her kullanıcı için uygun bildirim kanalını üretir.
-8. Bildirimler konsol ekranında gösterilir.
-9. `Logger`, yayımlama işlemini kaydeder.
+1. Kullanıcı giriş ekranında kimlik doğrulama yapılır.
+2. Giriş başarılıysa duyuru senaryosu başlar.
+3. Sisteme öğrenci ve öğretmen kullanıcılar eklenir.
+4. Kullanıcıların bildirim tercihleri belirlenir.
+5. Yönetici yeni bir sınav duyurusu oluşturur.
+6. `AnnouncementFactory`, uygun duyuru nesnesini üretir.
+7. Duyuru yayımlanır.
+8. `AnnouncementPublisher`, Observer yapısı ile kullanıcıları otomatik olarak bilgilendirir.
+9. `NotificationFactory`, her kullanıcı için uygun bildirim kanalını üretir.
+10. Bildirimler konsol ekranında gösterilir.
+11. `Logger`, yayımlama işlemini kaydeder.
 
 ## Çalıştırma Adımları
 
@@ -133,6 +147,11 @@ java -jar target/smart-campus-announcement-system-1.0-SNAPSHOT.jar
 
 ```text
 === Akıllı Kampüs Duyuru ve Bildirim Yönetim Sistemi ===
+Kullanıcı girişi
+Kullanıcı adı: admin
+Şifre: 1234
+Giriş başarılı.
+
 1. Sisteme kullanıcılar ekleniyor.
 2. Bildirim tercihleri belirlendi:
    - Ayşe Yılmaz -> EMAIL
