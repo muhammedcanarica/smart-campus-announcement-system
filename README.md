@@ -8,7 +8,7 @@ Akıllı Kampüs Duyuru ve Bildirim Yönetim Sistemi
 
 Bu proje, BİL 3204 Yazılım Mimari ve Tasarımı final ödevi için hazırlanmış Java Maven console uygulamasıdır. Amaç; kampüs duyurularının farklı kullanıcı tiplerine, kullanıcıların tercih ettiği bildirim kanalları üzerinden iletilmesini simüle ederken Observer Pattern, Factory Pattern, Singleton Pattern ve katmanlı mimariyi çalışan bir örnekle göstermektir.
 
-Web GUI demo, Java console uygulamasındaki duyuru ve bildirim akışını görsel olarak simüle eder. Ana çalışan uygulama Java Maven console uygulamasıdır.
+Web GUI demo, Java console uygulamasındaki duyuru ve bildirim akışını görsel olarak simüle eder. Ana kaynak kod Java Maven projesi olarak repoda bulunmaktadır.
 
 ## GitHub Pages Web Demo
 
@@ -18,7 +18,7 @@ Statik demo dosyaları `docs/` klasöründedir:
 - `docs/style.css`
 - `docs/app.js`
 
-GitHub Pages ayarı yapılırken kaynak klasör olarak `docs/` seçilebilir. Web GUI demo, Java console uygulamasındaki duyuru ve bildirim akışını görsel olarak simüle eder. Ana çalışan uygulama Java Maven console uygulamasıdır.
+GitHub Pages ayarı yapılırken kaynak klasör olarak `docs/` seçilebilir. Web GUI demo, Java console uygulamasındaki duyuru ve bildirim akışını görsel olarak simüle eder. Ana kaynak kod Java Maven projesi olarak repoda bulunmaktadır.
 
 Demo linki: [https://muhammedcanarica.github.io/smart-campus-announcement-system/](https://muhammedcanarica.github.io/smart-campus-announcement-system/)
 
@@ -101,21 +101,15 @@ Varsayılan giriş bilgileri:
 
 ## Nasıl Çalıştırılır?
 
-### Kolay çalıştırma
+### 1. Web GUI Demo
 
-Windows üzerinde proje kökündeki `Baslat.bat` dosyasına çift tıklanabilir. Dosya açıldığında şu menü gelir:
+[https://muhammedcanarica.github.io/smart-campus-announcement-system/](https://muhammedcanarica.github.io/smart-campus-announcement-system/)
 
-```text
-1 - Java Console Uygulamasını Çalıştır
-2 - Web GUI Demo Aç
-3 - Çıkış
-```
+### 2. GitHub Repo
 
-`Baslat.bat`, çalıştırıldığı konum ne olursa olsun kendi bulunduğu proje köküne geçer. Java uygulamasını çalıştırırken `-Dfile.encoding=UTF-8` parametresini kullanır ve JAR dosyasını `target/smart-campus-announcement-system-1.0-SNAPSHOT.jar` yolundan başlatır.
+[https://github.com/muhammedcanarica/smart-campus-announcement-system](https://github.com/muhammedcanarica/smart-campus-announcement-system)
 
-Teslim sırasında hocaya kısa yönlendirme için `TESLIM_NOTU.txt` dosyası da eklenmiştir.
-
-### Maven ile çalıştırma
+### 3. Maven ile çalıştırma
 
 Proje kök dizininde:
 
@@ -135,25 +129,15 @@ Linux/macOS üzerinde Maven Wrapper ile:
 ./mvnw clean package
 ```
 
-### jar ile çalıştırma
+### JAR çalıştırma
 
 Derleme tamamlandıktan sonra:
 
 ```bash
-java -jar target/smart-campus-announcement-system-1.0-SNAPSHOT.jar
+java -Dfile.encoding=UTF-8 -jar target/smart-campus-announcement-system-1.0-SNAPSHOT.jar
 ```
 
-Giriş ekranını otomatik geçip örnek senaryoyu doğrudan çalıştırmak için:
-
-```bash
-java -jar target/smart-campus-announcement-system-1.0-SNAPSHOT.jar --demo
-```
-
-Windows PowerShell üzerinde:
-
-```bash
-java -jar target\smart-campus-announcement-system-1.0-SNAPSHOT.jar
-```
+Web GUI demo, Java console uygulamasındaki duyuru ve bildirim akışını görsel olarak simüle eder. Ana kaynak kod Java Maven projesi olarak repoda bulunmaktadır.
 
 ## Ödev Gereksinimleri Kontrol Listesi
 
