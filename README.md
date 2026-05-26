@@ -8,7 +8,7 @@ Akıllı Kampüs Duyuru ve Bildirim Yönetim Sistemi
 
 Bu proje, BİL 3204 Yazılım Mimari ve Tasarımı final ödevi için hazırlanmış Java Maven console uygulamasıdır. Amaç; kampüs duyurularının farklı kullanıcı tiplerine, kullanıcıların tercih ettiği bildirim kanalları üzerinden iletilmesini simüle ederken Observer Pattern, Factory Pattern, Singleton Pattern ve katmanlı mimariyi çalışan bir örnekle göstermektir.
 
-Web GUI demo, Java console uygulamasındaki duyuru ve bildirim akışını görsel olarak simüle eder. Ana kaynak kod Java Maven projesi olarak repoda bulunmaktadır.
+Web arayüzü GitHub Pages üzerinde çalışan statik bir uygulamadır. Kullanıcı ekleme, duyuru yayınlama, bildirim oluşturma ve log üretme işlemleri tarayıcı içinde JavaScript ile yapılır. Ana kaynak kod Java Maven projesi olarak repoda bulunmaktadır.
 
 ## GitHub Pages Web Demo
 
@@ -18,7 +18,7 @@ Statik demo dosyaları `docs/` klasöründedir:
 - `docs/style.css`
 - `docs/app.js`
 
-GitHub Pages ayarı yapılırken kaynak klasör olarak `docs/` seçilebilir. Web GUI demo, Java console uygulamasındaki duyuru ve bildirim akışını görsel olarak simüle eder. Ana kaynak kod Java Maven projesi olarak repoda bulunmaktadır.
+GitHub Pages ayarı yapılırken kaynak klasör olarak `docs/` seçilebilir. Web arayüzü GitHub Pages üzerinde çalışan statik bir uygulamadır. Kullanıcı ekleme, duyuru yayınlama, bildirim oluşturma ve log üretme işlemleri tarayıcı içinde JavaScript ile yapılır. Ana kaynak kod Java Maven projesi olarak repoda bulunmaktadır.
 
 Demo linki: [https://muhammedcanarica.github.io/smart-campus-announcement-system/](https://muhammedcanarica.github.io/smart-campus-announcement-system/)
 
@@ -137,7 +137,7 @@ Derleme tamamlandıktan sonra:
 java -Dfile.encoding=UTF-8 -jar target/smart-campus-announcement-system-1.0-SNAPSHOT.jar
 ```
 
-Web GUI demo, Java console uygulamasındaki duyuru ve bildirim akışını görsel olarak simüle eder. Ana kaynak kod Java Maven projesi olarak repoda bulunmaktadır.
+Web arayüzü GitHub Pages üzerinde çalışan statik bir uygulamadır. Kullanıcı ekleme, duyuru yayınlama, bildirim oluşturma ve log üretme işlemleri tarayıcı içinde JavaScript ile yapılır. Ana kaynak kod Java Maven projesi olarak repoda bulunmaktadır.
 
 ## Ödev Gereksinimleri Kontrol Listesi
 

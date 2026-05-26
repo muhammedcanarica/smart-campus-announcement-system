@@ -12,32 +12,78 @@
       <div>
         <p class="eyebrow">BİL 3204 Yazılım Mimari ve Tasarımı</p>
         <h1>Akıllı Kampüs Duyuru ve Bildirim Yönetim Sistemi</h1>
+        <p class="lead">Bu web arayüzü, kampüs duyurularını yayınlamak ve kullanıcı bildirimlerini yönetmek için hazırlanmıştır.</p>
       </div>
-      <div class="status-pill">GitHub Pages Web GUI Demo</div>
+      <div class="header-actions">
+        <div class="status-pill">GitHub Pages üzerinde çalışan statik uygulama</div>
+        <button id="resetDataButton" class="danger-button" type="button">Verileri Sıfırla</button>
+      </div>
     </header>
 
-    <section class="dashboard" aria-label="Ödev gereksinimleri demo paneli">
-      <aside class="panel users-panel">
+    <section class="stats-grid" aria-label="Uygulama özeti">
+      <article class="stat-card">
+        <span>Kullanıcı</span>
+        <strong id="userCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Yayınlanan Duyuru</span>
+        <strong id="announcementCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Bildirim Kaydı</span>
+        <strong id="notificationCount">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Sistem Logu</span>
+        <strong id="logCount">0</strong>
+      </article>
+    </section>
+
+    <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+
+    <section class="app-grid">
+      <section class="panel users-panel">
         <div class="section-title">
-          <span>Kullanıcı Listesi</span>
-          <strong>Observer adayları</strong>
+          <span>Kullanıcı Yönetimi</span>
+          <strong>Observer kullanıcıları</strong>
         </div>
+
+        <form id="userForm" class="stacked-form">
+          <label for="userName">Ad Soyad</label>
+          <input id="userName" name="userName" type="text" placeholder="Örn. Zeynep Arslan">
+
+          <label for="userRole">Kullanıcı tipi</label>
+          <select id="userRole" name="userRole">
+            <option value="Öğrenci">Öğrenci</option>
+            <option value="Öğretmen">Öğretmen</option>
+          </select>
+
+          <label for="userPreference">Bildirim tercihi</label>
+          <select id="userPreference" name="userPreference">
+            <option value="Email">Email</option>
+            <option value="SMS">SMS</option>
+            <option value="Push">Push</option>
+          </select>
+
+          <button class="primary-button" type="submit">Kullanıcı Ekle</button>
+        </form>
+
         <div id="userList" class="user-list"></div>
-      </aside>
+      </section>
 
-      <section class="panel form-panel">
+      <section class="panel announcement-panel">
         <div class="section-title">
-          <span>Duyuru Oluşturma Formu</span>
-          <strong>Factory akışı</strong>
+          <span>Duyuru Yayınlama</span>
+          <strong>Factory + Application Layer</strong>
         </div>
 
-        <form id="announcementForm" class="announcement-form">
-          <label for="announcementType">Duyuru tipi seçimi</label>
+        <form id="announcementForm" class="stacked-form">
+          <label for="announcementType">Duyuru tipi</label>
           <select id="announcementType" name="announcementType">
-            <option value="EXAM">Sınav Duyurusu</option>
-            <option value="EVENT">Etkinlik Duyurusu</option>
-            <option value="FOOD_MENU">Yemekhane Duyurusu</option>
-            <option value="LIBRARY">Kütüphane Duyurusu</option>
+            <option value="EXAM">Sınav</option>
+            <option value="EVENT">Etkinlik</option>
+            <option value="FOOD_MENU">Yemekhane</option>
+            <option value="LIBRARY">Kütüphane</option>
           </select>
 
           <label for="announcementTitle">Başlık</label>
@@ -46,22 +92,35 @@
           <label for="announcementMessage">Mesaj</label>
           <textarea id="announcementMessage" name="announcementMessage" rows="5">Yazılım Mimarisi sınavı cuma günü saat 10:00'da B-204 salonunda yapılacaktır.</textarea>
 
-          <div class="scenario-note">
-            <h2>Demo Senaryosu / Bildirim Akışı</h2>
-            <p>Beklenen ödev senaryosunu adım adım log paneline yazar.</p>
-          </div>
-
-          <div class="button-row">
-            <button id="publishButton" class="primary-button" type="submit">Duyuru Yayınla</button>
-            <button id="scenarioButton" class="secondary-button" type="button">Demo Senaryosunu Çalıştır</button>
-          </div>
+          <button id="publishButton" class="primary-button" type="submit">Duyuru Yayınla</button>
         </form>
+
+        <div class="subsection-title">Yayınlanan Duyurular</div>
+        <div id="announcementList" class="record-list"></div>
       </section>
 
-      <aside class="panel patterns-panel">
+      <section class="panel notifications-panel">
         <div class="section-title">
-          <span>Tasarım Desenleri Kartları</span>
-          <strong>3 desen + mimari</strong>
+          <span>Bildirim Geçmişi</span>
+          <strong>Kullanıcı tercihlerine göre</strong>
+        </div>
+        <div id="notificationList" class="record-list tall-list"></div>
+      </section>
+    </section>
+
+    <section class="panel log-panel">
+      <div class="section-title">
+        <span>Sistem Logları</span>
+        <strong>Observer, Factory, Singleton</strong>
+      </div>
+      <div id="logOutput" class="log-output" aria-live="polite"></div>
+    </section>
+
+    <section class="support-grid">
+      <section class="panel patterns-panel">
+        <div class="section-title">
+          <span>Tasarım Desenleri</span>
+          <strong>Mimari anlatım</strong>
         </div>
         <div class="pattern-grid">
           <article class="pattern-card" data-tone="observer">
@@ -81,13 +140,11 @@
             <p>Presentation, Application, Domain, Infrastructure katmanları ayrılmıştır.</p>
           </article>
         </div>
-      </aside>
-    </section>
+      </section>
 
-    <section class="support-grid">
       <section class="panel architecture-panel">
         <div class="section-title">
-          <span>Mimari Katmanlar Bölümü</span>
+          <span>Mimari Katmanlar</span>
           <strong>Katmanlı yapı</strong>
         </div>
         <div class="layer-flow" aria-label="Mimari katman şeması">
@@ -99,13 +156,8 @@
           <div class="layer-arrow">→</div>
           <div class="layer-node">Infrastructure Layer</div>
         </div>
-      </section>
 
-      <section class="panel checklist-panel">
-        <div class="section-title">
-          <span>Ödev Gereksinimleri Kontrol Listesi</span>
-          <strong>Tamamlandı</strong>
-        </div>
+        <div class="subsection-title compact">Ödev Gereksinimleri</div>
         <ul class="checklist">
           <li>2 kullanıcı tipi</li>
           <li>2+ duyuru tipi</li>
@@ -119,14 +171,6 @@
           <li>Çalışan örnek senaryo</li>
         </ul>
       </section>
-    </section>
-
-    <section class="panel log-panel">
-      <div class="section-title">
-        <span>Sistem Logları Paneli</span>
-        <button id="clearLogs" class="ghost-button" type="button">Temizle</button>
-      </div>
-      <div id="logOutput" class="log-output" aria-live="polite"></div>
     </section>
   </main>
 
