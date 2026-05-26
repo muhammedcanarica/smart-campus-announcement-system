@@ -245,8 +245,8 @@ typeSelect.addEventListener("change", applyTypeDefaults);
 
 clearLogsButton.addEventListener("click", () => {
   logOutput.innerHTML = "";
-  addLog("[Application Layer]", "Sistem hazır. Web GUI demo GitHub Pages üzerinde statik olarak çalışır.", "application");
+  addLog("[Application Layer]", "Sistem hazır. Duyuru yayınlamak için formu kullanın veya demo senaryosunu çalıştırın.", "application");
 });
 
 renderUsers();
-addLog("[Application Layer]", "Sistem hazır. Demo senaryosu veya duyuru yayınlama akışı başlatılabilir.", "application");
+addLog("[Application Layer]", "Sistem hazır. Duyuru yayınlamak için formu kullanın veya demo senaryosunu çalıştırın.", "application");

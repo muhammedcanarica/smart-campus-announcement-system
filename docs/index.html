@@ -19,7 +19,7 @@
     <section class="dashboard" aria-label="Ödev gereksinimleri demo paneli">
       <aside class="panel users-panel">
         <div class="section-title">
-          <span>1. Kullanıcı Listesi</span>
+          <span>Kullanıcı Listesi</span>
           <strong>Observer adayları</strong>
         </div>
         <div id="userList" class="user-list"></div>
@@ -27,7 +27,7 @@
 
       <section class="panel form-panel">
         <div class="section-title">
-          <span>2. Duyuru Oluşturma Formu</span>
+          <span>Duyuru Oluşturma Formu</span>
           <strong>Factory akışı</strong>
         </div>
 
@@ -46,6 +46,11 @@
           <label for="announcementMessage">Mesaj</label>
           <textarea id="announcementMessage" name="announcementMessage" rows="5">Yazılım Mimarisi sınavı cuma günü saat 10:00'da B-204 salonunda yapılacaktır.</textarea>
 
+          <div class="scenario-note">
+            <h2>Demo Senaryosu / Bildirim Akışı</h2>
+            <p>Beklenen ödev senaryosunu adım adım log paneline yazar.</p>
+          </div>
+
           <div class="button-row">
             <button id="publishButton" class="primary-button" type="submit">Duyuru Yayınla</button>
             <button id="scenarioButton" class="secondary-button" type="button">Demo Senaryosunu Çalıştır</button>
@@ -55,7 +60,7 @@
 
       <aside class="panel patterns-panel">
         <div class="section-title">
-          <span>5. Tasarım Desenleri Kartları</span>
+          <span>Tasarım Desenleri Kartları</span>
           <strong>3 desen + mimari</strong>
         </div>
         <div class="pattern-grid">
@@ -82,7 +87,7 @@
     <section class="support-grid">
       <section class="panel architecture-panel">
         <div class="section-title">
-          <span>6. Mimari Katmanlar Bölümü</span>
+          <span>Mimari Katmanlar Bölümü</span>
           <strong>Katmanlı yapı</strong>
         </div>
         <div class="layer-flow" aria-label="Mimari katman şeması">
@@ -98,7 +103,7 @@
 
       <section class="panel checklist-panel">
         <div class="section-title">
-          <span>7. Ödev Gereksinimleri Kontrol Listesi</span>
+          <span>Ödev Gereksinimleri Kontrol Listesi</span>
           <strong>Tamamlandı</strong>
         </div>
         <ul class="checklist">
@@ -118,7 +123,7 @@
 
     <section class="panel log-panel">
       <div class="section-title">
-        <span>4. Sistem Logları Paneli</span>
+        <span>Sistem Logları Paneli</span>
         <button id="clearLogs" class="ghost-button" type="button">Temizle</button>
       </div>
       <div id="logOutput" class="log-output" aria-live="polite"></div>

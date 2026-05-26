@@ -8,7 +8,7 @@ Akıllı Kampüs Duyuru ve Bildirim Yönetim Sistemi
 
 Bu proje, BİL 3204 Yazılım Mimari ve Tasarımı final ödevi için hazırlanmış Java Maven console uygulamasıdır. Amaç; kampüs duyurularının farklı kullanıcı tiplerine, kullanıcıların tercih ettiği bildirim kanalları üzerinden iletilmesini simüle ederken Observer Pattern, Factory Pattern, Singleton Pattern ve katmanlı mimariyi çalışan bir örnekle göstermektir.
 
-Uygulama ana teslim olarak console üzerinden çalışır. `docs/` klasöründeki statik web demo ise aynı senaryoyu sunumda görsel olarak anlatmak için hazırlanmıştır.
+Web GUI demo, Java console uygulamasındaki duyuru ve bildirim akışını görsel olarak simüle eder. Ana çalışan uygulama Java Maven console uygulamasıdır.
 
 ## Kullanılan Teknolojiler
 
@@ -151,9 +151,9 @@ Statik demo dosyaları `docs/` klasöründedir:
 - `docs/style.css`
 - `docs/app.js`
 
-GitHub Pages ayarı yapılırken kaynak klasör olarak `docs/` seçilebilir.
+GitHub Pages ayarı yapılırken kaynak klasör olarak `docs/` seçilebilir. Web GUI demo, Java console uygulamasındaki duyuru ve bildirim akışını görsel olarak simüle eder. Ana çalışan uygulama Java Maven console uygulamasıdır.
 
-Demo linki: `https://kullanici-adiniz.github.io/repo-adiniz/`
+Demo linki: [https://muhammedcanarica.github.io/smart-campus-announcement-system/](https://muhammedcanarica.github.io/smart-campus-announcement-system/)
 
 ## Ödev Gereksinimleri Kontrol Listesi
 
