@@ -13,7 +13,7 @@ public class EmailNotification implements Notification {
 
     @Override
     public void send(String recipientName, Announcement announcement) {
-        System.out.println("     E-posta bildirimi -> " + recipientName + ": " + announcement.getTitle()
+        System.out.println("     Email bildirimi gönderildi -> " + recipientName + ": " + announcement.getTitle()
                 + " - " + announcement.getMessage());
     }
 }

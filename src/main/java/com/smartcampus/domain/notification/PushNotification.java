@@ -13,7 +13,7 @@ public class PushNotification implements Notification {
 
     @Override
     public void send(String recipientName, Announcement announcement) {
-        System.out.println("     Push bildirimi -> " + recipientName + ": " + announcement.getTitle()
+        System.out.println("     Push bildirimi gönderildi -> " + recipientName + ": " + announcement.getTitle()
                 + " - " + announcement.getMessage());
     }
 }

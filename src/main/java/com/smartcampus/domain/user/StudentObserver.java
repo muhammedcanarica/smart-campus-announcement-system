@@ -27,7 +27,7 @@ public class StudentObserver implements UserObserver {
 
     @Override
     public void update(Announcement announcement, Notification notification) {
-        System.out.println("     Observer bildirimi -> Öğrenci " + name
+        System.out.println("     StudentObserver -> Öğrenci " + name
                 + " yeni duyurudan haberdar oldu.");
         notification.send(name, announcement);
     }

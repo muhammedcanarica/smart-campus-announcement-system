@@ -21,6 +21,8 @@ public class AnnouncementPublisher {
     public void registerObserver(UserObserver observer) {
         if (!observers.contains(observer)) {
             observers.add(observer);
+            System.out.println("   Observer Pattern -> " + observer.getClass().getSimpleName()
+                    + " abone edildi: " + observer.getName());
         }
     }
 
@@ -33,17 +35,20 @@ public class AnnouncementPublisher {
      */
     public void publish(Announcement announcement) {
         System.out.println();
-        System.out.println("5. Duyuru yayımlanıyor: " + announcement.getTitle());
-        System.out.println("6. Observer yapısı kullanıcıları otomatik bilgilendiriyor.");
-        System.out.println("7. NotificationFactory uygun bildirim kanallarını oluşturuyor.");
-        System.out.println("8. Bildirimler konsolda gösteriliyor.");
+        System.out.println("--------------------------------------------------");
+        System.out.println("AnnouncementPublisher -> Duyuru yayınlanıyor: " + announcement.getTitle());
+        System.out.println("Duyuru tipi: " + announcement.getType());
+        System.out.println("Mesaj: " + announcement.getMessage());
+        System.out.println("Observer Pattern -> Kayıtlı kullanıcılar otomatik bilgilendiriliyor.");
 
         for (UserObserver observer : observers) {
+            System.out.println("   Observer Pattern -> " + observer.getClass().getSimpleName()
+                    + ".update(...) çağrılıyor: " + observer.getName());
             Notification notification = notificationFactory.createNotification(
                     observer.getNotificationPreference().getNotificationType()
             );
-            System.out.println("   - " + observer.getName() + " için "
-                    + notification.getClass().getSimpleName() + " oluşturuldu.");
+            System.out.println("   NotificationFactory -> " + observer.getNotificationPreference()
+                    + " tercihi için " + notification.getClass().getSimpleName() + " oluşturdu.");
             observer.update(announcement, notification);
         }
     }

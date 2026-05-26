@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akıllı Kampüs Duyuru ve Bildirim Yönetim Sistemi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">BİL 3204 Yazılım Mimari ve Tasarımı</p>
+        <h1>Akıllı Kampüs Duyuru ve Bildirim Yönetim Sistemi</h1>
+      </div>
+      <div class="status-pill">GitHub Pages Web GUI Demo</div>
+    </header>
+
+    <section class="dashboard" aria-label="Ödev gereksinimleri demo paneli">
+      <aside class="panel users-panel">
+        <div class="section-title">
+          <span>1. Kullanıcı Listesi</span>
+          <strong>Observer adayları</strong>
+        </div>
+        <div id="userList" class="user-list"></div>
+      </aside>
+
+      <section class="panel form-panel">
+        <div class="section-title">
+          <span>2. Duyuru Oluşturma Formu</span>
+          <strong>Factory akışı</strong>
+        </div>
+
+        <form id="announcementForm" class="announcement-form">
+          <label for="announcementType">Duyuru tipi seçimi</label>
+          <select id="announcementType" name="announcementType">
+            <option value="EXAM">Sınav Duyurusu</option>
+            <option value="EVENT">Etkinlik Duyurusu</option>
+            <option value="FOOD_MENU">Yemekhane Duyurusu</option>
+            <option value="LIBRARY">Kütüphane Duyurusu</option>
+          </select>
+
+          <label for="announcementTitle">Başlık</label>
+          <input id="announcementTitle" name="announcementTitle" type="text" value="Ara Sınav Programı">
+
+          <label for="announcementMessage">Mesaj</label>
+          <textarea id="announcementMessage" name="announcementMessage" rows="5">Yazılım Mimarisi sınavı cuma günü saat 10:00'da B-204 salonunda yapılacaktır.</textarea>
+
+          <div class="button-row">
+            <button id="publishButton" class="primary-button" type="submit">Duyuru Yayınla</button>
+            <button id="scenarioButton" class="secondary-button" type="button">Demo Senaryosunu Çalıştır</button>
+          </div>
+        </form>
+      </section>
+
+      <aside class="panel patterns-panel">
+        <div class="section-title">
+          <span>5. Tasarım Desenleri Kartları</span>
+          <strong>3 desen + mimari</strong>
+        </div>
+        <div class="pattern-grid">
+          <article class="pattern-card" data-tone="observer">
+            <h2>Observer Pattern</h2>
+            <p>Duyuru yayınlandığında observer kullanıcılar otomatik bilgilendirilir.</p>
+          </article>
+          <article class="pattern-card" data-tone="factory">
+            <h2>Factory Pattern</h2>
+            <p>Duyuru ve bildirim nesneleri factory sınıflarıyla oluşturulur.</p>
+          </article>
+          <article class="pattern-card" data-tone="singleton">
+            <h2>Singleton Pattern</h2>
+            <p>Logger tek instance olarak kayıt alır.</p>
+          </article>
+          <article class="pattern-card" data-tone="layered">
+            <h2>Layered Architecture</h2>
+            <p>Presentation, Application, Domain, Infrastructure katmanları ayrılmıştır.</p>
+          </article>
+        </div>
+      </aside>
+    </section>
+
+    <section class="support-grid">
+      <section class="panel architecture-panel">
+        <div class="section-title">
+          <span>6. Mimari Katmanlar Bölümü</span>
+          <strong>Katmanlı yapı</strong>
+        </div>
+        <div class="layer-flow" aria-label="Mimari katman şeması">
+          <div class="layer-node">Presentation Layer</div>
+          <div class="layer-arrow">→</div>
+          <div class="layer-node">Application Layer</div>
+          <div class="layer-arrow">→</div>
+          <div class="layer-node">Domain Layer</div>
+          <div class="layer-arrow">→</div>
+          <div class="layer-node">Infrastructure Layer</div>
+        </div>
+      </section>
+
+      <section class="panel checklist-panel">
+        <div class="section-title">
+          <span>7. Ödev Gereksinimleri Kontrol Listesi</span>
+          <strong>Tamamlandı</strong>
+        </div>
+        <ul class="checklist">
+          <li>2 kullanıcı tipi</li>
+          <li>2+ duyuru tipi</li>
+          <li>2+ bildirim tipi</li>
+          <li>Observer Pattern</li>
+          <li>Factory Pattern</li>
+          <li>Singleton Pattern</li>
+          <li>Katmanlı mimari</li>
+          <li>Interface / abstract class</li>
+          <li>Basit veri yönetimi</li>
+          <li>Çalışan örnek senaryo</li>
+        </ul>
+      </section>
+    </section>
+
+    <section class="panel log-panel">
+      <div class="section-title">
+        <span>4. Sistem Logları Paneli</span>
+        <button id="clearLogs" class="ghost-button" type="button">Temizle</button>
+      </div>
+      <div id="logOutput" class="log-output" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

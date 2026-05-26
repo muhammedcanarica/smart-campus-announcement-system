@@ -16,6 +16,6 @@ public final class Logger {
     }
 
     public void log(String message) {
-        System.out.println("[LOG " + LocalDateTime.now() + "] " + message);
+        System.out.println("[Logger Singleton | " + LocalDateTime.now() + "] " + message);
     }
 }

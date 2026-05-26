@@ -1,0 +1,19 @@
+Akıllı Kampüs Duyuru ve Bildirim Yönetim Sistemi
+
+Kolay çalıştırma:
+
+Baslat.bat dosyasına çift tıklayın.
+
+Menüden seçim yapın:
+
+1 - Java Console Uygulamasını Çalıştır
+2 - Web GUI Demo Aç
+3 - Çıkış
+
+Java console uygulaması için giriş bilgileri:
+Kullanıcı adı: admin
+Şifre: 1234
+
+Not:
+Java uygulaması projenin ana çalışan teslimidir.
+docs klasöründeki web demo, aynı senaryoyu GitHub Pages için görsel olarak simüle eder.

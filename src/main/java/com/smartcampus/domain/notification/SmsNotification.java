@@ -13,7 +13,7 @@ public class SmsNotification implements Notification {
 
     @Override
     public void send(String recipientName, Announcement announcement) {
-        System.out.println("     SMS bildirimi -> " + recipientName + ": " + announcement.getTitle()
+        System.out.println("     SMS bildirimi gönderildi -> " + recipientName + ": " + announcement.getTitle()
                 + " - " + announcement.getMessage());
     }
 }

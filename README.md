@@ -1,177 +1,169 @@
-# Smart Campus Announcement System
+# Akıllı Kampüs Duyuru ve Bildirim Yönetim Sistemi
 
-## Proje Hakkında
+## Proje Adı
 
-Bu proje, üniversite kampüsünde yayımlanan duyuruların ilgili kullanıcılara otomatik olarak iletilmesini simüle eden bir Java Maven console uygulamasıdır. Sistem içinde öğrenci ve öğretmen kullanıcı tipleri bulunur. Kullanıcılar kendi bildirim tercihlerini belirler ve yeni bir duyuru yayımlandığında sistem bu tercihe göre e-posta, SMS veya push bildirimi üretir.
+Akıllı Kampüs Duyuru ve Bildirim Yönetim Sistemi
 
-Projede aşağıdaki temel gereksinimler uygulanmıştır:
+## Proje Amacı
 
-- Console tabanlı kullanıcı girişi
-- En az iki kullanıcı tipi: `StudentObserver` ve `TeacherObserver`
-- Dört duyuru tipi: `ExamAnnouncement`, `EventAnnouncement`, `FoodMenuAnnouncement`, `LibraryAnnouncement`
-- Üç bildirim tipi: `EmailNotification`, `SmsNotification`, `PushNotification`
-- `InMemoryUserRepository` ile basit veri yönetimi
-- Gerçek servis kullanılmadan konsol üzerinden bildirim gösterimi
-- Observer, Factory ve Singleton tasarım desenlerinin birlikte kullanımı
+Bu proje, BİL 3204 Yazılım Mimari ve Tasarımı final ödevi için hazırlanmış Java Maven console uygulamasıdır. Amaç; kampüs duyurularının farklı kullanıcı tiplerine, kullanıcıların tercih ettiği bildirim kanalları üzerinden iletilmesini simüle ederken Observer Pattern, Factory Pattern, Singleton Pattern ve katmanlı mimariyi çalışan bir örnekle göstermektir.
 
-## Observer Pattern Nerede Kullanıldı?
+Uygulama ana teslim olarak console üzerinden çalışır. `docs/` klasöründeki statik web demo ise aynı senaryoyu sunumda görsel olarak anlatmak için hazırlanmıştır.
 
-Observer Pattern, duyuru yayımlandığında sisteme kayıtlı kullanıcıların otomatik olarak bilgilendirilmesi için kullanıldı.
+## Kullanılan Teknolojiler
 
-- `AnnouncementPublisher`, gözlemlenen nesne yani publisher rolündedir.
-- `UserObserver`, tüm gözlemciler için ortak arayüzdür.
-- `StudentObserver` ve `TeacherObserver`, bu arayüzü uygulayan somut gözlemci sınıflarıdır.
-- `AnnouncementPublisher.publish(...)` metodu çalıştığında kayıtlı kullanıcılar tek tek dolaşılır ve her kullanıcının `update(...)` metodu çağrılır.
+- Java 17
+- Maven
+- Console tabanlı Java uygulaması
+- HTML, CSS ve JavaScript ile statik GitHub Pages demosu
+- In-memory veri yönetimi
 
-Bu desen sayesinde duyuru yayımlama mantığı ile kullanıcı sınıfları birbirinden ayrılmıştır. Yeni bir kullanıcı tipi eklenmek istendiğinde mevcut yayınlama kodunu değiştirmeden yalnızca yeni bir observer sınıfı eklemek yeterlidir.
+## Mimari Katmanlar
 
-## Factory Pattern Nerede Kullanıldı?
+### Presentation Layer
 
-Factory Pattern, nesne oluşturma işlemlerini tek merkezde toplamak için iki farklı yerde kullanıldı.
+`com.smartcampus.presentation` paketi uygulamanın giriş noktasını içerir. `Main` sınıfı kullanıcı girişini alır, örnek senaryoyu başlatır ve uygulama akışını console üzerinden gösterir.
 
-### `AnnouncementFactory`
+### Application Layer
 
-`AnnouncementFactory`, verilen `AnnouncementType` değerine göre uygun duyuru nesnesini üretir:
+`com.smartcampus.application` paketi iş akışını koordine eder. `AuthenticationService`, `AnnouncementService`, `AnnouncementPublisher`, `AnnouncementFactory` ve `NotificationFactory` bu katmanda yer alır.
 
-- `EXAM` -> `ExamAnnouncement`
-- `EVENT` -> `EventAnnouncement`
-- `FOOD_MENU` -> `FoodMenuAnnouncement`
-- `LIBRARY` -> `LibraryAnnouncement`
+### Domain Layer
 
-### `NotificationFactory`
+`com.smartcampus.domain` paketi sistemin temel kavramlarını içerir. Duyuru sınıfları, bildirim arayüzleri, kullanıcı observer sınıfları, enum değerleri ve abstract/interface yapıları bu katmanda bulunur.
 
-`NotificationFactory`, kullanıcının tercih ettiği `NotificationType` değerine göre uygun bildirim nesnesini üretir:
+### Infrastructure Layer
 
-- `EMAIL` -> `EmailNotification`
-- `SMS` -> `SmsNotification`
-- `PUSH` -> `PushNotification`
+`com.smartcampus.infrastructure` paketi teknik destek sınıflarını içerir. `InMemoryUserRepository` basit veri yönetimini, `Logger` ise Singleton loglama mekanizmasını sağlar.
 
-Bu yaklaşım sayesinde nesne oluşturma sorumluluğu istemci koddan ayrılmıştır. Böylece `Main` ve `AnnouncementPublisher` sınıfları somut sınıfların nasıl oluşturulduğunu bilmek zorunda kalmaz.
+## Kullanılan Tasarım Desenleri
 
-## Singleton Pattern Nerede Kullanıldı?
+### Observer Pattern
 
-Singleton Pattern, `Logger` sınıfında kullanıldı.
+Observer Pattern, duyuru yayınlandığında sisteme kayıtlı kullanıcıların otomatik olarak bilgilendirilmesi için kullanılır.
 
-- `Logger` sınıfının constructor metodu `private` olarak tanımlandı.
-- Sınıf içinde tek bir `INSTANCE` nesnesi tutuldu.
-- Uygulama genelinde loglama işlemleri `Logger.getInstance().log(...)` şeklinde yapıldı.
+- `AnnouncementPublisher`: Subject/publisher rolündedir.
+- `UserObserver`: Observer arayüzüdür.
+- `StudentObserver`: Öğrenci kullanıcılar için somut observer sınıfıdır.
+- `TeacherObserver`: Öğretmen kullanıcılar için somut observer sınıfıdır.
 
-Bu desenin amacı, uygulama boyunca tek bir ortak logger nesnesi kullanılmasını sağlamaktır. Böylece farklı sınıflar ayrı ayrı logger üretmek yerine aynı loglama servisini paylaşır.
+`AnnouncementPublisher.publish(...)` çalıştığında kayıtlı observer nesneleri dolaşılır ve her kullanıcı için `update(...)` metodu çağrılır.
 
-## Katmanlı Mimari Nasıl Kuruldu?
+### Factory Pattern
 
-Proje, sorumlulukları birbirinden ayırmak için katmanlı mimari ile tasarlandı.
+Factory Pattern, nesne oluşturma sorumluluğunu merkezi sınıflara taşımak için kullanılır.
 
-| Katman | Paket | Görev |
-| --- | --- | --- |
-| Sunum katmanı | `presentation` | Uygulamanın giriş noktası olan `Main` sınıfını içerir. |
-| Uygulama katmanı | `application` | İş akışını yöneten servisleri, kimlik doğrulama servisini, publisher sınıfını ve factory sınıflarını içerir. |
-| Alan modeli katmanı | `domain` | Duyuru, kullanıcı, kullanıcı rolü ve bildirim kavramlarını temsil eden sınıfları içerir. |
-| Altyapı katmanı | `infrastructure` | `Logger` ve `InMemoryUserRepository` gibi teknik bileşenleri içerir. |
+- `AnnouncementFactory`: `AnnouncementType` değerine göre `ExamAnnouncement`, `EventAnnouncement`, `FoodMenuAnnouncement` veya `LibraryAnnouncement` nesnesi oluşturur.
+- `NotificationFactory`: `NotificationType` değerine göre `EmailNotification`, `SmsNotification` veya `PushNotification` nesnesi oluşturur.
 
-Bu yapı sayesinde her katman kendi sorumluluğuna odaklanır:
+Bu sayede `Main` ve `AnnouncementPublisher` somut sınıfların oluşturulma detaylarına bağımlı kalmaz.
 
-- `presentation`, yalnızca senaryoyu başlatır.
-- `application`, sistemin iş akışını yönetir.
-- `domain`, iş kurallarını ve temel nesneleri tanımlar.
-- `infrastructure`, veri saklama ve loglama gibi teknik ihtiyaçları karşılar.
+### Singleton Pattern
 
-Katmanlı mimari, kodun okunabilirliğini artırır, bakımını kolaylaştırır ve ileride yeni özellik eklemeyi daha düzenli hale getirir.
+Singleton Pattern, `Logger` sınıfında kullanılır. `Logger` constructor metodu private olduğu için dışarıdan yeni logger nesnesi oluşturulamaz. Uygulama genelinde tek logger örneğine `Logger.getInstance()` ile erişilir.
 
-## Yapay Zeka Bu Projede Nasıl Kullanıldı?
+Console çıktısında her duyuru yayınlandıktan sonra `Logger Singleton kayıt alıyor` mesajı ve log satırı görülebilir.
 
-Yapay zeka, uygulamanın çalışma zamanında kullanılan bir bileşen değildir. Projede gerçek zamanlı yapay zeka servisi, makine öğrenmesi modeli veya otomatik karar verme sistemi bulunmamaktadır.
+## Uygulama Senaryosu
 
-Yapay zeka, geliştirme sürecinde yardımcı araç olarak kullanılmıştır:
+1. Kullanıcı console üzerinden giriş yapar.
+2. Varsayılan yönetici hesabı doğrulanır.
+3. Sisteme üç kullanıcı eklenir:
+   - Ayşe Yılmaz - Öğrenci - Email
+   - Mehmet Kaya - Öğrenci - SMS
+   - Dr. Elif Demir - Öğretmen - Push
+4. Kullanıcılar `AnnouncementPublisher` nesnesine observer olarak kaydedilir.
+5. `AnnouncementFactory` iki farklı duyuru üretir:
+   - `ExamAnnouncement`
+   - `EventAnnouncement`
+6. `AnnouncementService` duyuruları yayınlama sürecini başlatır.
+7. `AnnouncementPublisher` observer kullanıcıları bilgilendirir.
+8. `NotificationFactory` kullanıcı tercihine uygun bildirim kanalını oluşturur.
+9. Email, SMS ve Push bildirimleri console çıktısında simüle edilir.
+10. `Logger` Singleton yayınlama işlemini kaydeder.
 
-- Proje yapısının planlanması
-- Tasarım desenlerinin uygun sınıflara dağıtılması
-- Kod iskeletinin hazırlanması
-- README dokümantasyonunun düzenlenmesi
-- Derleme ve çalıştırma çıktılarının kontrol edilmesi
-
-Sonuç olarak yapay zeka, geliştiriciye yardımcı olan bir üretkenlik aracı olarak kullanılmış; uygulamanın iş mantığı ise Java sınıfları ve tasarım desenleri ile gerçekleştirilmiştir.
-
-## Kullanıcı Girişi
-
-Uygulama başladığında önce console tabanlı giriş ekranı gösterilir. Giriş kontrolü `AuthenticationService` tarafından yapılır ve kullanıcı bilgileri `InMemoryUserRepository` içinde tutulur.
-
-Varsayılan yönetici bilgileri:
+Varsayılan giriş bilgileri:
 
 - Kullanıcı adı: `admin`
 - Şifre: `1234`
 
-Giriş başarılı olduğunda mevcut duyuru yayımlama senaryosu çalışır. Giriş başarısız olduğunda program `Giriş başarısız. Program sonlandırılıyor.` mesajını yazar ve sonlanır.
+## Nasıl Çalıştırılır?
 
-## Uygulama Senaryosu
+### Kolay çalıştırma
 
-`Main.java` içinde aşağıdaki senaryo çalıştırılır:
+Windows üzerinde proje kökündeki `Baslat.bat` dosyasına çift tıklanabilir. Dosya açıldığında şu menü gelir:
 
-1. Kullanıcı giriş ekranında kimlik doğrulama yapılır.
-2. Giriş başarılıysa duyuru senaryosu başlar.
-3. Sisteme öğrenci ve öğretmen kullanıcılar eklenir.
-4. Kullanıcıların bildirim tercihleri belirlenir.
-5. Yönetici yeni bir sınav duyurusu oluşturur.
-6. `AnnouncementFactory`, uygun duyuru nesnesini üretir.
-7. Duyuru yayımlanır.
-8. `AnnouncementPublisher`, Observer yapısı ile kullanıcıları otomatik olarak bilgilendirir.
-9. `NotificationFactory`, her kullanıcı için uygun bildirim kanalını üretir.
-10. Bildirimler konsol ekranında gösterilir.
-11. `Logger`, yayımlama işlemini kaydeder.
+```text
+1 - Java Console Uygulamasını Çalıştır
+2 - Web GUI Demo Aç
+3 - Çıkış
+```
 
-## Çalıştırma Adımları
+`Baslat.bat`, çalıştırıldığı konum ne olursa olsun kendi bulunduğu proje köküne geçer. Java uygulamasını çalıştırırken `-Dfile.encoding=UTF-8` parametresini kullanır ve JAR dosyasını `target/smart-campus-announcement-system-1.0-SNAPSHOT.jar` yolundan başlatır.
 
-### Windows
+Teslim sırasında hocaya kısa yönlendirme için `TESLIM_NOTU.txt` dosyası da eklenmiştir.
 
-1. Proje klasöründe PowerShell açın.
-2. Projeyi Maven Wrapper ile derleyin:
+### Maven ile çalıştırma
+
+Proje kök dizininde:
+
+```bash
+mvn clean package
+```
+
+Windows üzerinde Maven Wrapper ile:
 
 ```bash
 .\mvnw.cmd clean package
 ```
 
-3. Uygulamayı çalıştırın:
+Linux/macOS üzerinde Maven Wrapper ile:
+
+```bash
+./mvnw clean package
+```
+
+### jar ile çalıştırma
+
+Derleme tamamlandıktan sonra:
+
+```bash
+java -jar target/smart-campus-announcement-system-1.0-SNAPSHOT.jar
+```
+
+Giriş ekranını otomatik geçip örnek senaryoyu doğrudan çalıştırmak için:
+
+```bash
+java -jar target/smart-campus-announcement-system-1.0-SNAPSHOT.jar --demo
+```
+
+Windows PowerShell üzerinde:
 
 ```bash
 java -jar target\smart-campus-announcement-system-1.0-SNAPSHOT.jar
 ```
 
-### Linux / macOS
+## GitHub Pages Web Demo
 
-```bash
-./mvnw clean package
-java -jar target/smart-campus-announcement-system-1.0-SNAPSHOT.jar
-```
+Statik demo dosyaları `docs/` klasöründedir:
 
-## Örnek Konsol Çıktısı
+- `docs/index.html`
+- `docs/style.css`
+- `docs/app.js`
 
-```text
-=== Akıllı Kampüs Duyuru ve Bildirim Yönetim Sistemi ===
-Kullanıcı girişi
-Kullanıcı adı: admin
-Şifre: 1234
-Giriş başarılı.
+GitHub Pages ayarı yapılırken kaynak klasör olarak `docs/` seçilebilir.
 
-1. Sisteme kullanıcılar ekleniyor.
-2. Bildirim tercihleri belirlendi:
-   - Ayşe Yılmaz -> EMAIL
-   - Mehmet Kaya -> SMS
-   - Dr. Elif Demir -> PUSH
-3. Yönetici yeni bir sınav duyurusu oluşturuyor.
-4. AnnouncementFactory uygun duyuruyu oluşturdu: ExamAnnouncement
+Demo linki: `https://kullanici-adiniz.github.io/repo-adiniz/`
 
-5. Duyuru yayımlanıyor: Ara Sınav Programı
-6. Observer yapısı kullanıcıları otomatik bilgilendiriyor.
-7. NotificationFactory uygun bildirim kanallarını oluşturuyor.
-8. Bildirimler konsolda gösteriliyor.
-   - Ayşe Yılmaz için EmailNotification oluşturuldu.
-     Observer bildirimi -> Öğrenci Ayşe Yılmaz yeni duyurudan haberdar oldu.
-     E-posta bildirimi -> Ayşe Yılmaz: Ara Sınav Programı - Yazılım Mimarisi sınavı cuma günü saat 10:00'da B-204 salonunda yapılacaktır.
-   - Mehmet Kaya için SmsNotification oluşturuldu.
-     Observer bildirimi -> Öğrenci Mehmet Kaya yeni duyurudan haberdar oldu.
-     SMS bildirimi -> Mehmet Kaya: Ara Sınav Programı - Yazılım Mimarisi sınavı cuma günü saat 10:00'da B-204 salonunda yapılacaktır.
-   - Dr. Elif Demir için PushNotification oluşturuldu.
-     Observer bildirimi -> Öğretmen Dr. Elif Demir yeni duyurudan haberdar oldu.
-     Push bildirimi -> Dr. Elif Demir: Ara Sınav Programı - Yazılım Mimarisi sınavı cuma günü saat 10:00'da B-204 salonunda yapılacaktır.
-9. Logger yayımlama işlemini kaydediyor.
-```
+## Ödev Gereksinimleri Kontrol Listesi
+
+- [x] En az 2 kullanıcı tipi: Öğrenci, Öğretmen
+- [x] En az 2 duyuru tipi: Sınav, Etkinlik
+- [x] En az 2 bildirim tipi: Email, SMS, Push
+- [x] Observer Pattern
+- [x] Factory Pattern
+- [x] Singleton Pattern
+- [x] Katmanlı mimari
+- [x] Interface veya abstract class
+- [x] Basit veri yönetimi
+- [x] Çalışan örnek senaryo

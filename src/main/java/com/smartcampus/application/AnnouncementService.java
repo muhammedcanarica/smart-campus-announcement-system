@@ -14,9 +14,10 @@ public class AnnouncementService {
     }
 
     public void publishAnnouncement(Announcement announcement) {
+        System.out.println("Application Layer -> AnnouncementService yayınlama sürecini başlatıyor.");
         announcementPublisher.publish(announcement);
-        System.out.println("9. Logger yayımlama işlemini kaydediyor.");
-        Logger.getInstance().log("Duyuru yayımlandı: " + announcement.getType()
+        System.out.println("Singleton Pattern -> Logger Singleton kayıt alıyor.");
+        Logger.getInstance().log("Duyuru yayınlandı: " + announcement.getType()
                 + " - " + announcement.getTitle());
     }
 }
