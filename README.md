@@ -10,6 +10,18 @@ Bu proje, BİL 3204 Yazılım Mimari ve Tasarımı final ödevi için hazırlanm
 
 Web GUI demo, Java console uygulamasındaki duyuru ve bildirim akışını görsel olarak simüle eder. Ana çalışan uygulama Java Maven console uygulamasıdır.
 
+## GitHub Pages Web Demo
+
+Statik demo dosyaları `docs/` klasöründedir:
+
+- `docs/index.html`
+- `docs/style.css`
+- `docs/app.js`
+
+GitHub Pages ayarı yapılırken kaynak klasör olarak `docs/` seçilebilir. Web GUI demo, Java console uygulamasındaki duyuru ve bildirim akışını görsel olarak simüle eder. Ana çalışan uygulama Java Maven console uygulamasıdır.
+
+Demo linki: [https://muhammedcanarica.github.io/smart-campus-announcement-system/](https://muhammedcanarica.github.io/smart-campus-announcement-system/)
+
 ## Kullanılan Teknolojiler
 
 - Java 17
@@ -142,18 +154,6 @@ Windows PowerShell üzerinde:
 ```bash
 java -jar target\smart-campus-announcement-system-1.0-SNAPSHOT.jar
 ```
-
-## GitHub Pages Web Demo
-
-Statik demo dosyaları `docs/` klasöründedir:
-
-- `docs/index.html`
-- `docs/style.css`
-- `docs/app.js`
-
-GitHub Pages ayarı yapılırken kaynak klasör olarak `docs/` seçilebilir. Web GUI demo, Java console uygulamasındaki duyuru ve bildirim akışını görsel olarak simüle eder. Ana çalışan uygulama Java Maven console uygulamasıdır.
-
-Demo linki: [https://muhammedcanarica.github.io/smart-campus-announcement-system/](https://muhammedcanarica.github.io/smart-campus-announcement-system/)
 
 ## Ödev Gereksinimleri Kontrol Listesi
 
