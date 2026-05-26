@@ -1,19 +1,23 @@
 Akıllı Kampüs Duyuru ve Bildirim Yönetim Sistemi
 
-Kolay çalıştırma:
+1. Web GUI Demo:
+https://muhammedcanarica.github.io/smart-campus-announcement-system/
 
-Baslat.bat dosyasına çift tıklayın.
+2. GitHub Repo:
+https://github.com/muhammedcanarica/smart-campus-announcement-system
 
-Menüden seçim yapın:
+3. Maven ile çalıştırma:
+mvn clean package
 
-1 - Java Console Uygulamasını Çalıştır
-2 - Web GUI Demo Aç
-3 - Çıkış
+Windows Maven Wrapper:
+.\mvnw.cmd clean package
 
-Java console uygulaması için giriş bilgileri:
-Kullanıcı adı: admin
-Şifre: 1234
+Linux/macOS Maven Wrapper:
+./mvnw clean package
+
+JAR çalıştırma:
+java -Dfile.encoding=UTF-8 -jar target/smart-campus-announcement-system-1.0-SNAPSHOT.jar
 
 Not:
-Java uygulaması projenin ana çalışan teslimidir.
-docs klasöründeki web demo, aynı senaryoyu GitHub Pages için görsel olarak simüle eder.
+Web GUI demo, Java console uygulamasındaki duyuru ve bildirim akışını görsel olarak simüle eder.
+Ana kaynak kod Java Maven projesi olarak repoda bulunmaktadır.
